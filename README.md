@@ -12,6 +12,15 @@ It's a simple attachment for standard tilt windows aimed at preventing window sl
 
 Additionally, this model is fully parametric, thus easy to adjust for most of standard windows.
 
+## Features/parts
+
+- clamp - part that clamps window frame and gasket
+- pusher - long finger that connects clamp and touches jamb (wall part) 
+  - hole for lanyard - to make it easier to pull off window and to hang it on window handle when not in use
+  - on top there are object parameters embossed
+- jamb bumper - extended touch area of pusher
+  - on top there's window side marker
+
 ## Customization
 
 Base parameters for user to adjust:
@@ -22,6 +31,8 @@ Base parameters for user to adjust:
   - use power of trigonometry, goniometer, protractor or easy mode - digital protractor (they are surprisingly cheap) to measure your window
   - when using digital protractor, subtract angle your window frame is deviating from straight - buildings rarely have true straight angles!
   - in my case it's `4.45°` and the code was tested to render reasonable slopes up to 20°; however, above 15° current logic starts to make clamp asymmetrical
+- `use_on_right_side_of_window` - `true` if lock is to be attached on right side of window, `false` if on left
+  - usually there's only one window in pair that's tilting, and it's easier to put lock on centre of window pair, rather than from wall side; however, any of two can be tiltable, hence this parameter
 
 Other parameters are left in code for fine-tuning. For ease of prototyping, core parameters (except length) are embossed to the object.
 
@@ -29,6 +40,6 @@ Other parameters are left in code for fine-tuning. For ease of prototyping, core
 
 In-place printing without supports. 
 
-It worked fine with Hyper PLA-CF, although probably any similar material will work. Everything printed fine event at 0.24mm layer. 
+It worked fine with Hyper PLA-CF, although probably any similar material will work. Everything printed fine even at 0.24mm layer. 
 
 10% in-fill should be sufficient, I stuck with Cross-Hatch from Orca Slicer.

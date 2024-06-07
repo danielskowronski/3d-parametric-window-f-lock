@@ -1,6 +1,7 @@
 full_length = 80;
 window_frame_thickness = 20.75;
 window_open_angle = 4.45;
+use_on_right_side_of_window=true;
 
 // ---------------------------------------------------------
 
@@ -9,17 +10,20 @@ pusher_width = 10;
 clamp_depth = 20;
 text_depth = 0.75;
 text_height = 7;
-frame_bumper_height = 40;
-frame_bumper_thickness = 10;
+jamb_bumper_height = 40;
+jamb_bumper_thickness = 10;
 
 // ---------------------------------------------------------
 
+slope_angle = use_on_right_side_of_window ? -window_open_angle : window_open_angle;
+dir_text = use_on_right_side_of_window ? "R" : "L";
+hole_dia=2;
 text_padding=(pusher_width-text_height)/2;
-clamp_external_width = 1.75*window_frame_thickness;
 clamp_external_width=(1+abs(cos(-window_open_angle)))*window_frame_thickness;
-
+clamp_y_offset = use_on_right_side_of_window ? pusher_width : -2*pusher_width;
 ver_text_height=(clamp_external_width-window_frame_thickness)/4;
 ver_text_padding=ver_text_height/2;
+
 
 // very dirty equivalient to "%f.02"
 function fmt_num(x) = str(
@@ -43,19 +47,33 @@ difference(){
         ), text_height, "Ubuntu-Title");
       };
     };
-  }
+  };
+  translate([clamp_external_width/2,2*pusher_width,2*hole_dia]){
+    rotate(a=[90,0,0]){
+      cylinder(3*pusher_width, hole_dia, hole_dia);
+    };
+  };
 };
 
-// frame bumper
-translate([full_length-frame_bumper_thickness,0,0]){
-  cube([frame_bumper_thickness,pusher_width,frame_bumper_height]);
+// jamb bumper
+difference(){
+  translate([full_length-jamb_bumper_thickness,0,0]){
+    cube([jamb_bumper_thickness,pusher_width,jamb_bumper_height]);
+  };
+  translate([full_length-jamb_bumper_thickness+2,pusher_width-2,jamb_bumper_height-text_depth]){
+    rotate(a=[0,0,270]) {
+      linear_extrude(2*text_depth) {
+        text(dir_text, text_height, "Ubuntu-Title");
+      };
+    };
+  };
 };
 
 // clamp
-translate([0,pusher_width,0]){
+translate([0,clamp_y_offset,0]){
   difference(){
     cube([clamp_external_width,clamp_depth,h]);
-    rotate(a=[0,-window_open_angle,0]){
+    rotate(a=[0,slope_angle,0]){
       translate([(clamp_external_width-window_frame_thickness)/2,0,-h]){
         cube([window_frame_thickness,clamp_external_width,h*3]);
       };
@@ -64,7 +82,7 @@ translate([0,pusher_width,0]){
       rotate(a=[0,0,-90]) {
         linear_extrude(text_depth) {
           text(str(
-            "v0.4"
+            " v0.5"
           ), ver_text_height, "Ubuntu-Title");
         };
       };
