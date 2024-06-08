@@ -2,15 +2,19 @@
 
 Check it out on [Printables.com](https://www.printables.com/model/905381-parametric-window-f-lock)
 
+Preview from OpenSCAD: 
+
+<img src="./demo/render01.png" width="512px"> <img src="./demo/render02.png" width="512px">
+
 ## Model origin and licence
 
 This model is heavily inspired by [Window lock // Fensterarretierung](https://www.printables.com/model/102126-window-lock-fensterarretierung) designed by [WVRPrinter](https://www.printables.com/@WVRPrinter_146394). It was originally licensed under CC-BY-NC and I treat my inspired work as a remix.
 
 ## Idea
 
-It's a simple attachment for standard tilt windows aimed at preventing window slamming during strong drafts. One of the main goals of general design was to have it easy to attach and detach without any impact on a window.
+It's a simple attachment for standard tilt windows aimed at preventing window slamming during strong drafts. One of the main goals of general design was to have it easy to attach and detach without any impact on the window. The name comes from the top-view shape of the letter F.
 
-Additionally, this model is fully parametric, thus easy to adjust for most of standard windows.
+Additionally, this model is fully parametric, thus easy to adjust for most of standard windows, including tilt angle, size and the option to choose left or right side of window.
 
 ## Features/parts
 
@@ -40,6 +44,6 @@ Other parameters are left in code for fine-tuning. For ease of prototyping, core
 
 In-place printing without supports. 
 
-It worked fine with Hyper PLA-CF, although probably any similar material will work. Everything printed fine even at 0.24mm layer. 
+It worked fine with Hyper PLA-CF, although probably any similar material will work. Everything printed fine, even at 0.24mm layer; however, for small diagonal lanyard hole, I'd recommend going with 0.16-0.20mm.
 
 10% in-fill should be sufficient, I stuck with Cross-Hatch from Orca Slicer.
