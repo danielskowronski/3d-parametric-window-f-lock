@@ -12,12 +12,13 @@ text_depth = 0.75;
 text_height = 7;
 jamb_bumper_height = 40;
 jamb_bumper_thickness = 10;
+use_angled_hole=true;
+hole_dia=3;
 
 // ---------------------------------------------------------
 
-slope_angle = use_on_right_side_of_window ? -window_open_angle : window_open_angle;
+slope_angle = use_on_right_side_of_window ? -window_open_angle : -window_open_angle;
 dir_text = use_on_right_side_of_window ? "R" : "L";
-hole_dia=2;
 text_padding=(pusher_width-text_height)/2;
 clamp_external_width=(1+abs(cos(-window_open_angle)))*window_frame_thickness;
 clamp_y_offset = use_on_right_side_of_window ? pusher_width : -2*pusher_width;
@@ -48,11 +49,21 @@ difference(){
       };
     };
   };
-  translate([clamp_external_width/2,2*pusher_width,2*hole_dia]){
-    rotate(a=[90,0,0]){
-      cylinder(3*pusher_width, hole_dia, hole_dia);
+
+  if (use_angled_hole){
+    translate([clamp_external_width/2,use_on_right_side_of_window ? pusher_width/2+hole_dia : pusher_width/2-hole_dia,-1*hole_dia]){
+      rotate(a=[use_on_right_side_of_window ? 45 : -45,0,0]){
+        cylinder(3*pusher_width, d=hole_dia, d=hole_dia);
+      };
     };
-  };
+  }
+  else {
+    translate([clamp_external_width/2,2*pusher_width,2*hole_dia]){
+      rotate(a=[90,0,0]){
+        cylinder(3*pusher_width, hole_dia, hole_dia);
+      };
+    };
+  }
 };
 
 // jamb bumper
@@ -82,7 +93,7 @@ translate([0,clamp_y_offset,0]){
       rotate(a=[0,0,-90]) {
         linear_extrude(text_depth) {
           text(str(
-            " v0.5"
+            " v0.6"
           ), ver_text_height, "Ubuntu-Title");
         };
       };
